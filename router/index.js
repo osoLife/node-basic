@@ -1,6 +1,18 @@
 const express = require('express')
+const jwt = require('jsonwebtoken')
+
+const secretKey = 'osoLife key'
 
 const router = express.Router()
+
+router.post('/login', (req, res) => {
+    const token = jwt.sign({ name: 'osoLife' }, secretKey, { expiresIn: '0.5h' })
+    res.send({
+        status: 200,
+        message: '登录成功',
+        token
+    })
+})
 
 router.get('/getUserList', (req, res) => {
     res.send({
